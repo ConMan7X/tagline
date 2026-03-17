@@ -43,7 +43,7 @@ export default function MovieInfo({ numHints, onMovieLoaded }: { numHints: numbe
 		<div className="MovieInfo">
 			<p>Tagline: {movie.tagline}</p>
 			{hints.map((hint, index) => (
-				<p key={index}>hint {index + 1}: {hint}</p>
+				<p key={index}>Hint {index + 1}: {hint}</p>
 			))}
 		</div>
 	);

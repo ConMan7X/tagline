@@ -21,7 +21,6 @@ button {
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 16px;
-  margin-top: 16px;
   margin: 5px 5px;
 }
 
@@ -32,4 +31,16 @@ button:hover {
 button:disabled {
   background: #eb5050;
   cursor: not-allowed;
+}
+
+input {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+  background: #1b263b;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 5px 5px;
 }
