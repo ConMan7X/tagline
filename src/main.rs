@@ -46,7 +46,7 @@ fn get_random_movie_id() -> u32 {
 
 async fn server() {
     let app = Router::new()
-        .route("/api/movie/", get(get_movie_data))
+        .route("/api/movie", get(get_movie_data))
         .fallback_service(ServeDir::new("frontend/dist"));
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));

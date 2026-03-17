@@ -12,31 +12,20 @@ export default function MovieInfo({ numHints, onMovieLoaded }: { numHints: numbe
 	}, []);
 
 	const fetchMovie = async() => {
-		// try {
-		// 	const response = await fetch('/api/movie');
-		// 	const data = await response.json();
-		// 	setMovie(data);
-		// } catch (error) {
-		// 	console.error('Error fetching movie:', error);
-		// } finally {
-		// 	setLoading(false);
-		// }
-
-		const sampleMovie: Movie = {
-			title: "Inception",
-			tagline: "Your mind is the scene of the crime.",
-			year: 2010,
-			director: "Christopher Nolan",
-			lead_actors: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-			genre: "Science Fiction"
-		};
-		setMovie(sampleMovie);
-		setLoading(false);
-		onMovieLoaded(sampleMovie.title);
+		try {
+			const response = await fetch('/api/movie');
+			const data = await response.json();
+			setMovie(data);
+			onMovieLoaded(data.title);
+		} catch (error) {
+			console.error('Error fetching movie:', error);
+		} finally {
+			setLoading(false);
+		}
 	}
 
 	if (loading) {
-		return <div>Loading...</div>
+		return <div className="MovieInfo">Loading...</div>
 	}
 
 	if (!movie) {
