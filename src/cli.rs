@@ -1,17 +1,7 @@
 use crate::tmdb;
 
-use serde::Deserialize;
-use rand::prelude::IndexedRandom;
-
-#[derive(Deserialize)]
-struct MovieList {
-    movies: Vec<u32>,
-}
-
-pub async fn cli () {
+pub async fn cli(id: u32) {
     println!("Welcome to MovieTag!");
-
-    let id = get_random_movie_id();
     
     let movie_data = tmdb::fetch_movie_data(&id.to_string()).await.unwrap_or_else(|e| {
         eprintln!("Error fetching movie data: {}", e);
@@ -69,21 +59,4 @@ pub async fn cli () {
             println!("Incorrect guess. Try again!");
         }
     }
-}
-
-fn get_random_movie_id() -> u32 {
-    let json = std::fs::read_to_string("movies.json").unwrap_or_else(|e| {
-        eprintln!("Failed to read movies.json: {}", e);
-        std::process::exit(1);
-    });
-
-    let movie_list: MovieList = serde_json::from_str(&json).unwrap_or_else(|e| {
-        eprintln!("Failed to parse movies.json: {}", e);
-        std::process::exit(1);
-    });
-
-    *movie_list.movies.choose(&mut rand::rng()).unwrap_or_else(|| {
-        eprintln!("Movie list is empty");
-        std::process::exit(1);
-    })
 }

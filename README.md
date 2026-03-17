@@ -12,8 +12,8 @@ cargo run -- cli
 or
 
 ```bash
-cargo build &&
-./tagline cli
+cargo build --release &&
+./target/release/tagline cli
 ```
 
 ## Frontend [WIP]
@@ -27,8 +27,8 @@ cargo run
 or
 
 ```bash
-cargo build &&
-./tagline
+cargo build --release &&
+./target/release/tagline
 ```
 
-Then the frontend will be accesible on http://localhost:5173/.
+Then the frontend will be accesible on http://localhost:3000/.

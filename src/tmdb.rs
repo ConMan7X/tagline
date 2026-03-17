@@ -1,5 +1,5 @@
 use reqwest::{header, Client, Url};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use dotenv::dotenv;
 use std::env;
 
@@ -34,7 +34,7 @@ struct TmdbCrew {
     job: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Serialize)]
 pub struct Movie {
     pub title: String,
     pub tagline: String,
