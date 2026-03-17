@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 
 import type { Movie } from "../interfaces";
+import "../App.css";
 
-export default function MovieInfo({ numHints, giveUp }: { numHints: number; giveUp: boolean }) {
+export default function MovieInfo({ numHints, onMovieLoaded }: { numHints: number; onMovieLoaded: (title: string) => void}) {
     const [movie, setMovie] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true)
 
@@ -31,6 +32,7 @@ export default function MovieInfo({ numHints, giveUp }: { numHints: number; give
 		};
 		setMovie(sampleMovie);
 		setLoading(false);
+		onMovieLoaded(sampleMovie.title);
 	}
 
 	if (loading) {
@@ -49,12 +51,11 @@ export default function MovieInfo({ numHints, giveUp }: { numHints: number; give
 	if (numHints >= 5) hints.push(`There are no more hints available.`);
 
 	return (
-		<div>
+		<div className="MovieInfo">
 			<p>Tagline: {movie.tagline}</p>
 			{hints.map((hint, index) => (
 				<p key={index}>hint {index + 1}: {hint}</p>
 			))}
-			{giveUp && <p>The movie is: {movie.title}</p>}
 		</div>
 	);
 }
