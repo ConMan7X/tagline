@@ -1,5 +1,5 @@
 use reqwest::{header, Client, Url};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use dotenv::dotenv;
 use std::env;
 
@@ -34,7 +34,7 @@ struct TmdbCrew {
     job: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, Serialize)]
 pub struct Movie {
     pub title: String,
     pub tagline: String,
@@ -48,6 +48,8 @@ pub async fn fetch_movie_data(id: &str) -> Result<Movie, Box<dyn std::error::Err
     dotenv().ok();
     let api_key = env::var("API_KEY").expect("API_KEY must be set");
     let client = Client::new();
+
+    println!("API key present: {}", !api_key.is_empty() && api_key != "MISSING");
 
     // Fetch main movie details
     let movie_url = Url::parse_with_params(

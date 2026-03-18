@@ -1,0 +1,11 @@
+services:
+  tagline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tagline:latest
+    container_name: tagline
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
