@@ -18,6 +18,7 @@ struct MovieList {
 
 #[tokio::main]
 async fn main() {
+
     let args: Vec<String> = env::args().collect();
 
     if args.len() > 1 && args[1] == "cli" {
@@ -28,7 +29,7 @@ async fn main() {
 }
 
 fn get_random_movie_id() -> u32 {
-    let json = std::fs::read_to_string("movies.json").unwrap_or_else(|e| {
+    let json = std::fs::read_to_string("data/movies.json").unwrap_or_else(|e| {
         eprintln!("Failed to read movies.json: {}", e);
         std::process::exit(1);
     });
@@ -45,11 +46,13 @@ fn get_random_movie_id() -> u32 {
 }
 
 async fn server() {
+    println!("Starting server...");
+
     let app = Router::new()
         .route("/api/movie", get(get_movie_data))
         .fallback_service(ServeDir::new("frontend/dist"));
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }

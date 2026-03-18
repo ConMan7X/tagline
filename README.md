@@ -2,6 +2,22 @@
 
 Tagline is a game about guessing movies just from the tagline or promotional line given to the movie.
 
+## Docker
+
+Running tagline in a docker container is the easiest method.
+
+You will need to create a .env file with your TMDB API key:
+
+```.env
+API_KEY={Your API Key}
+```
+
+Then, to run in detached mode simply run:
+
+```bash
+docker compose up -d
+```
+
 ## CLI
 
 You can run the CLI version of Tagline by simply using the cli argument:
@@ -16,9 +32,9 @@ cargo build --release &&
 ./target/release/tagline cli
 ```
 
-## Frontend [WIP]
+## Frontend
 
-The frontend is currently WIP, but will be runnable by simply omitting the cli argument:
+The frontend is runnable by simply omitting the cli argument:
 
 ```bash
 cargo run

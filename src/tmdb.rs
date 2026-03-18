@@ -49,6 +49,8 @@ pub async fn fetch_movie_data(id: &str) -> Result<Movie, Box<dyn std::error::Err
     let api_key = env::var("API_KEY").expect("API_KEY must be set");
     let client = Client::new();
 
+    println!("API key present: {}", !api_key.is_empty() && api_key != "MISSING");
+
     // Fetch main movie details
     let movie_url = Url::parse_with_params(
         &format!("https://api.themoviedb.org/3/movie/{}", id),
